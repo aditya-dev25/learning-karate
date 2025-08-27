@@ -4,15 +4,27 @@ function fn() {
   if (!env) {
     env = 'dev';
   }
+
   var config = {
-    env: env,
-    myVarName: 'someValue'
+    apiUrl : 'https://conduit-api.bondaracademy.com/api/'
   }
+
   if (env == 'dev') {
-    // customize
-    // e.g. config.foo = 'bar';
-  } else if (env == 'e2e') {
-    // customize
+    config.userEmail = 'aditya123@gmail.com';
+    config.userPassword = 'karate123';
+
+  } else if (env == 'qa') {
+    config.userEmail = 'aditya456@gmail.com';
+    config.userPassword = 'karate456';
   }
+
+  // Getting the Access Token - This will run once and set the value for accessToken. Use karate.call() for short-life tokens.
+  var accessToken = karate.callSingle('classpath:helpers/createToken.feature', config).authToken;
+
+
+  // This will set the accessToken as Authorization header for entire suite.
+  karate.configure('headers', {Authorization: 'Token ' + accessToken})
+
+  
   return config;
 }
