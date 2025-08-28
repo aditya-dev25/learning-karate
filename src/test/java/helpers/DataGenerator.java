@@ -26,9 +26,9 @@ public class DataGenerator {
 
     public static JSONObject getRandomArticleValues(){
         Faker faker = new Faker();
-        String title = faker.gameOfThrones().character();
-        String description = faker.gameOfThrones().city();
-        String body = faker.gameOfThrones().quote();
+        String title = faker.friends().character();
+        String description = faker.friends().location();
+        String body = faker.friends().quote();
         JSONObject json = new JSONObject();
         json.put("title", title);
         json.put("description", description);

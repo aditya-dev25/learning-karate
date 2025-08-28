@@ -1,4 +1,3 @@
-@debug
 Feature: SignUp Users
 
     Background:
