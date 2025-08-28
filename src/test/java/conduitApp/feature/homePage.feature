@@ -1,4 +1,3 @@
-@debug
 Feature: Tests for the Home Page
 
     Background: Define URL
@@ -19,9 +18,28 @@ Feature: Tests for the Home Page
 
     Scenario: Get 10 Articles from the page.
         Given path 'articles'
-        Given params {limit: 10, offset: 0}
+        Given params {limit: 100, offset: 0}
         When method Get
         Then status 200
-        And match response.articles == '#[10]'
+        And match response.articles == '#[27]'
         And match response.articlesCount == 27
         And match response.articlesCount != 10
+        And match response == {articles: '#array', articlesCount: '#number'}
+        And match response.articles[0].createdAt contains '2025'
+
+        # Check each array item
+        And match response.articles[*].favoritesCount contains 21
+        And match response.articles[*].author.bio contains null
+
+        # If response is too long, can use wildcard -> ..
+        And match response..username contains "Artem Bondar"
+        
+        # Match each key value
+        And match each response..following == false
+        And match each response..following == '#boolean'
+        And match each response..favoritesCount == '#number'
+
+        # Double "##" indicates data_type or null - both are acceptable (including absence of key)
+        And match each response..bio == '##string' 
+
+
