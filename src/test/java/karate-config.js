@@ -21,7 +21,6 @@ function fn() {
   // Getting the Access Token - This will run once and set the value for accessToken. Use karate.call() for short-life tokens.
   var accessToken = karate.callSingle('classpath:helpers/createToken.feature', config).authToken;
 
-
   // This will set the accessToken as Authorization header for entire suite.
   karate.configure('headers', {Authorization: 'Token ' + accessToken})
 
