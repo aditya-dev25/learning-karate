@@ -24,6 +24,12 @@ public class DataGenerator {
         return password;
     }
 
+    public static String getRandomString(){
+        Faker faker = new Faker();
+        String string = faker.friends().quote();
+        return string;
+    }
+
     public static JSONObject getRandomArticleValues(){
         Faker faker = new Faker();
         String title = faker.friends().character();

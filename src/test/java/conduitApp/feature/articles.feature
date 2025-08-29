@@ -1,4 +1,3 @@
-@debug
 Feature: Tests for Articles component.
 
     Background:
