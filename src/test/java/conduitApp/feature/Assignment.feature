@@ -92,7 +92,7 @@ Feature: Home Work
 
         # Step 8: Verify that slug ID from Step 2 exist in one of the favorite articles
         And match response..slug contains firstArticleSlug
-
+        
     Scenario: Comment articles
         # Step 1: Get atricles of the global feed
         * configure headers = {}

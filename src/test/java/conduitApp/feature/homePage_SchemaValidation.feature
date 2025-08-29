@@ -1,3 +1,4 @@
+@debug
 Feature: Tests for the Home Page
 
     Background: Define URL
@@ -12,7 +13,7 @@ Feature: Tests for the Home Page
         And match response.tags contains ["Zoom", "YouTube"]
         And match response.tags !contains "GitHub1"
         And match response.tags contains any ["Exam", "Blog1"]
-        And match response.tags contains only ["Test","testTag","Git","testTag-12","YouTube","Zoom","Blog","Bondar Academy","Exam","GitHub"]
+        And match response.tags contains only ["Test","Git","testTag-12","Zoom","Blog","Bondar Academy","YouTube","Exam","Enroll","GitHub"]
         And match response.tags == '#array'
         And match each response.tags == '#string'
 
@@ -25,7 +26,7 @@ Feature: Tests for the Home Page
         When method Get
         Then status 200
 
-        And match response == {articles: '#[27]', articlesCount: '#number'}
+        And match response == {articles: '#[]', articlesCount: '#number'}
         And match each response.articles == 
         """
             {

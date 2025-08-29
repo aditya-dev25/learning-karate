@@ -1,4 +1,3 @@
-@debug @parallel=false
 Feature: SignUp Users
 
     Background:
