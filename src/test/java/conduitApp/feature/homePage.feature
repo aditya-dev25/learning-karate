@@ -41,4 +41,27 @@ Feature: Tests for the Home Page
         # Double "##" indicates data_type or null - both are acceptable (including absence of key)
         And match each response..bio == '##string' 
 
+    @debug
+    Scenario: Conditional Logic
+        Given path 'articles'
+        Given params {limit: 10, offset: 0}
+        When method Get
+        Then status 200
+
+        * def countFavourite = response.articles[0].favoritesCount
+        * def articleObject = response.articles[0]
+
+        # * if (countFavourite == 0) karate.call('classpath:helpers/addLikes.feature', articleObject)
+
+        # If we want to use the result from the helper feature
+        * def result = countFavourite == 0 ? karate.call('classpath:helpers/addLikes.feature', articleObject).likesCount : countFavourite
+
+        Given path 'articles'
+        Given params {limit: 10, offset: 0}
+        When method Get
+        Then status 200
+
+        # And match response.articles[0].favoritesCount == 1
+        And match response.articles[0].favoritesCount == result
+
 

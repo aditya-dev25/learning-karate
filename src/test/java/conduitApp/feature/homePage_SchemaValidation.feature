@@ -1,4 +1,3 @@
-@debug
 Feature: Tests for the Home Page
 
     Background: Define URL
