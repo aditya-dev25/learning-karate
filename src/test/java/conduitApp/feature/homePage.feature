@@ -1,3 +1,4 @@
+@parallel=false
 Feature: Tests for the Home Page
 
     Background: Define URL
@@ -41,7 +42,6 @@ Feature: Tests for the Home Page
         # Double "##" indicates data_type or null - both are acceptable (including absence of key)
         And match each response..bio == '##string' 
 
-    @debug
     Scenario: Conditional Logic
         Given path 'articles'
         Given params {limit: 10, offset: 0}
@@ -64,4 +64,39 @@ Feature: Tests for the Home Page
         # And match response.articles[0].favoritesCount == 1
         And match response.articles[0].favoritesCount == result
 
+    Scenario: Retry Logic
+        * configure retry = {count: 10, interval: 5000}
 
+        Given path 'articles'
+        And params {limit: 10, offset: 0}
+        And retry until response.articles[0].favoritesCount == 1
+        When method Get
+        Then status 200
+
+    Scenario: Sleep Logic
+        * def sleep = function(pause){ java.lang.Thread.sleep(pause) }
+
+        Given path 'articles'
+        And params {limit: 10, offset: 0}
+        When method Get
+        * eval sleep(5000)
+        Then status 200
+
+    Scenario: Type Conversion - NUMBER TO STRING
+        * def foo = 10
+        # Before : * def json = {"bar": #(foo)} 
+        # Concatenant the '' to the variable to convert it to String
+        * def json = {"bar": #(foo + '')}  
+        * match json == {"bar": '10'}
+
+    @debug
+    Scenario: Type Conversion - STRING TO NUMBER
+        * def foo = '10'
+        # Before : * def json1 = {"bar": #(foo)}
+        # Do the arithmetic to the variable to convert it to Number
+        * def json = {"bar": #(foo * 1)}  
+        * match json == {"bar": 10}
+
+        # Using JavaScript - Remove ~~ for float
+        * def json2 = {"bar": #(~~parseInt(foo))}
+        * match json == {"bar": 10}

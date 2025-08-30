@@ -8,7 +8,7 @@ public class DataGenerator {
     
     public static String getRandomEmail(){
         Faker faker = new Faker();
-        String email = faker.name().firstName().toLowerCase() + faker.random().nextInt(0, 100) + "@test.com";
+        String email = faker.internet().emailAddress();
         return email;
     }
 
@@ -20,7 +20,7 @@ public class DataGenerator {
 
     public static String getRandonPassword(){
         Faker faker = new Faker();
-        String password = faker.howIMetYourMother().catchPhrase();
+        String password = faker.internet().password(8,20);
         return password;
     }
 
@@ -32,7 +32,7 @@ public class DataGenerator {
 
     public static JSONObject getRandomArticleValues(){
         Faker faker = new Faker();
-        String title = faker.friends().character();
+        String title = faker.artist().name();
         String description = faker.friends().location();
         String body = faker.friends().quote();
         JSONObject json = new JSONObject();
