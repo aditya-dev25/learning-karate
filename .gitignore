@@ -16,6 +16,8 @@
 *.nar
 *.ear
 *.zip
+# MySQL data volume
+Resources/mysql-data/
 *.tar.gz
 *.rar
 

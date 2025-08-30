@@ -10,3 +10,20 @@ services:
             - ./target:/usr/src/app/target
             - ~/.m2:/root/.m2
         command: mvn test -Dkarate.env="qa"
+    mysql:
+        image: mysql:8.0
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: testdb
+            MYSQL_USER: testuser
+            MYSQL_PASSWORD: testpass
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./Resources/mysql-data:/var/lib/mysql
+            - ./Resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
