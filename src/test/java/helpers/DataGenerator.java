@@ -18,6 +18,18 @@ public class DataGenerator {
         return username;
     }
 
+    public static String getRandomCharaterName(){
+        Faker faker = new Faker();
+        String charName = faker.funnyName().name();
+        return charName;
+    }
+
+    public static int getRandomInt(){
+        Faker faker = new Faker();
+        int randomInt  = faker.random().nextInt(1,1000);
+        return randomInt;
+    }
+
     public static String getRandonPassword(){
         Faker faker = new Faker();
         String password = faker.internet().password(8,20);

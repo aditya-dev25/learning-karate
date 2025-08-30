@@ -89,7 +89,6 @@ Feature: Tests for the Home Page
         * def json = {"bar": #(foo + '')}  
         * match json == {"bar": '10'}
 
-    @debug
     Scenario: Type Conversion - STRING TO NUMBER
         * def foo = '10'
         # Before : * def json1 = {"bar": #(foo)}
