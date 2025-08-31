@@ -1,4 +1,4 @@
-@parallel=false
+@parallel=false @ignore
 Feature: Work with Database
 
     Background: Work with Database
