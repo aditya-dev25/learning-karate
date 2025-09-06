@@ -59,11 +59,20 @@
 
     <build>
         <testResources>
+            <!-- Keep feature files and JSON data in test/java -->
             <testResource>
                 <directory>src/test/java</directory>
                 <excludes>
                     <exclude>**/*.java</exclude>
                 </excludes>
+            </testResource>
+
+            <!-- Also include all files from test/resources -->
+            <testResource>
+                <directory>src/test/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
             </testResource>
         </testResources>
         <plugins>
@@ -85,7 +94,7 @@
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
             </plugin>
-              <plugin>
+            <plugin>
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
                 <version>${gatling.plugin.version}</version>

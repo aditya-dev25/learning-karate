@@ -11,7 +11,8 @@ Feature: SignUp Users
 
 
         Given url apiUrl
-
+    
+    @debug
     Scenario: Create a new User
 
         Given path 'users'

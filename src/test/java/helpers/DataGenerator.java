@@ -44,7 +44,7 @@ public class DataGenerator {
 
     public static JSONObject getRandomArticleValues(){
         Faker faker = new Faker();
-        String title = faker.artist().name();
+        String title = faker.lorem().characters(8,20, true, true);
         String description = faker.friends().location();
         String body = faker.friends().quote();
         JSONObject json = new JSONObject();
